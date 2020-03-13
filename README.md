@@ -12,4 +12,8 @@ The following guides illustrate how to use some features concretely:
 
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
 * [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
+---
+# springboot-jpa 学生导师互选系统
+* 2020.3.12
+* springboot2.2.5 lombok
 
