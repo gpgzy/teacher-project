@@ -1,9 +1,14 @@
 package com.example.teacherproject.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Data
+@NoArgsConstructor
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,4 +16,8 @@ public class Course {
     private String name;
     private int minScore;
     private double weight;
+    @OneToMany(mappedBy = "course")
+    private List<StudentElectCourse> studentElectCourseList;
+    @ManyToOne
+    private Teacher teacher;
 }
