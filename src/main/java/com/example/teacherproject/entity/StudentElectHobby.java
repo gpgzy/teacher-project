@@ -4,17 +4,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Hobby {
+public class StudentElectHobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String detail;
-    private double weight;
-   @OneToMany
-    private List<StudentElectHobby> studentElectHobbyList;
+    @ManyToOne
+    private Student student;
+    @ManyToOne
+    private Hobby hobby;
 }

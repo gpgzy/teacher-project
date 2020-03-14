@@ -18,7 +18,7 @@ public class Student {
     @ManyToOne
     private Teacher teacher;
     @OneToMany(mappedBy = "student")
-    private List<Hobby> hobbies;
+    private List<StudentElectHobby> studentElectHobbyList;
     @OneToMany(mappedBy = "student")
     private List<StudentElectCourse> studentElectCourseList;
 }
