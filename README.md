@@ -6,10 +6,10 @@ lombok
 jpa 
 mysql:8
 ---
-关系描述
-*Course&Student ManyToMany
-*Teacher&Student OneToMany
-*Student&Hobby OneToMany
-*Teacher&Course OneToMany
+## 关系描述
+* Course&Student ManyToMany
+* Teacher&Student OneToMany
+* Student&Hobby ManyToMany
+* Teacher&Course OneToMany
 
 
