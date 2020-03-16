@@ -3,13 +3,13 @@
 * 2020.3.12
 * springboot:2.2.5 
 lombok 
-spring-data-jpa 
-mysql:8.x
+jpa 
+mysql:8
 ---
-## 关系描述
-* Course&Student ManyToMany
-* Teacher&Student OneToMany
-* Student&Hobby ManyToMany
-* Teacher&Course OneToMany
+关系描述
+*Course&Student ManyToMany
+*Teacher&Student OneToMany
+*Student&Hobby OneToMany
+*Teacher&Course OneToMany
 
 
