@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -11,9 +12,12 @@ import javax.persistence.*;
 public class StudentElectHobby {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @ManyToOne
     private Student student;
     @ManyToOne
     private Hobby hobby;
+    @Column(columnDefinition = "timestamp default current_timestamp ",
+            insertable = false, updatable = false)
+    private LocalDateTime insertTime;
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -12,12 +13,15 @@ import java.util.List;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
-    private int minScore;
+    private Integer minScore;
     private double weight;
     @OneToMany(mappedBy = "course")
     private List<StudentElectCourse> studentElectCourseList;
     @ManyToOne
     private Teacher teacher;
+    @Column(columnDefinition = "timestamp default current_timestamp ",
+            insertable = false, updatable = false)
+    private LocalDateTime insertTime;
 }
