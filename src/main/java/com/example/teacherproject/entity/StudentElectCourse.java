@@ -17,7 +17,7 @@ public class StudentElectCourse {
     private Student student;
     @ManyToOne
     private Course course;
-    private double score;
+    private Integer score;
     @Column(columnDefinition = "timestamp default current_timestamp ",
             insertable = false, updatable = false)
     private LocalDateTime insertTime;
