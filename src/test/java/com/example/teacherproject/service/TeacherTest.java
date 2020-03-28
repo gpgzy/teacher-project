@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+
 @Slf4j
 @SpringBootTest
 @Transactional
@@ -47,5 +49,15 @@ public class TeacherTest {
         teacherService.getCourseByTeacherId(4).forEach(course -> {
             log.debug("{}",course.getName());
         });
+    }
+    @Test
+    public void test_sortAllStudents(){
+        Map<Double,Student> map = teacherService.sortAllStudents();
+        for (Student student:map.values()){
+            log.debug("{}",student.getName());
+        }
+        for (Double d:map.keySet()){
+            log.debug("{}",d);
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.example.teacherproject.service;
 
 import com.example.teacherproject.entity.*;
 import com.example.teacherproject.repository.StudentElectCourseRepository;
+import com.example.teacherproject.repository.StudentRepository;
 import com.example.teacherproject.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,8 @@ public class TeacherService {
     private TeacherRepository teacherRepository;
     @Autowired
     private StudentElectCourseRepository studentElectCourseRepository;
+    @Autowired
+    private StudentRepository studentRepository;
     /**
      * 添加教师
      * 返回所有教师的信息
@@ -76,24 +79,30 @@ public class TeacherService {
     }
 
     /**
-     * 给学生排序
-     * 还没有写好
-     * @param teacher
-     * @param course
+     * 给所有学生排序
      * @return
      */
-    public List<Student> sortStudents(Teacher teacher,Course course){
-        List<Student> list1 = teacherRepository.findStudentsByTeacherId(teacher.getId());
-        List<StudentElectCourse> list2 = null ;
-        Map<StudentElectCourse,Double> map = new HashMap<StudentElectCourse, Double>();
-        for (Student s:list1) {
-            list2.add(studentElectCourseRepository.findAllByCourseAndStudent(s.getId(),course.getId()));
-        }
-        for (StudentElectCourse sc:list2)
+    public Map<Double,Student> sortAllStudents(){
+        List<Student> list1 = studentRepository.findAll();
+        Map<Double,Student> map = new TreeMap<Double,Student>(new Comparator<Double>(){
+            public int compare(Double obj1,Double obj2){
+                //降序排序
+                return obj2.compareTo(obj1);
+            }
+        });
+        for (Student student:list1)
         {
-            double sum = sc.getScore()*sc.getCourse().getWeight();
-            map.put(sc,sum);
+            double sum = 0;
+            int i = 0;
+            List<StudentElectCourse> list2 = student.getStudentElectCourseList();
+            for (StudentElectCourse sc:list2) {
+                i++;
+                sum+=sc.getScore()*sc.getCourse().getWeight();
+            }
+            double arr = sum/(double)i;
+            map.put(arr,student);
+
         }
-        return list1;
+        return map;
     }
 }

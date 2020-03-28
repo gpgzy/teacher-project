@@ -33,7 +33,7 @@ public class StudentElectiveCourseTest {
         StudentElectCourse studentElectCourse = new StudentElectCourse();
         studentElectCourse.setCourse(course);
         studentElectCourse.setStudent(student);
-        studentElectCourse.setScore(88);
+        studentElectCourse.setScore(50);
         studentRepository.save(student);
         courseRepository.save(course);
         studentElectCourseRepository.save(studentElectCourse);
