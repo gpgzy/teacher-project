@@ -17,6 +17,7 @@ public class Teacher {
     private Integer maxStu;
     private Integer currentStu;
     private Double minScore;
+    private String password;
     @OneToMany(mappedBy = "teacher")
     private List<Student> students;
     @OneToMany(mappedBy = "teacher")

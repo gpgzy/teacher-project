@@ -63,10 +63,14 @@ public class TeacherService {
     public List<Student> addOneStudent(Student student,int tid){
         Teacher teacher = teacherRepository.findAllById(tid);
         student.setTeacher(teacher);
+        if(student.getId()==null)
+        {
+            studentRepository.save(student);
+        }
         int stuNo = teacher.getCurrentStu();
         stuNo++;
         teacherRepository.updateCurrentById(stuNo,teacher.getId());
-        return teacherRepository.findStudentsByTeacherId(teacher.getId());
+        return teacher.getStudents();
     }
 
     /**
@@ -75,7 +79,7 @@ public class TeacherService {
      * @return
      */
     public List<Course> getCourseByTeacherId(int tid){
-       return teacherRepository.findCourseByTeacherId(tid);
+       return teacherRepository.findAllById(tid).getCourses();
     }
 
     /**
@@ -104,5 +108,17 @@ public class TeacherService {
 
         }
         return map;
+    }
+
+    /**
+     * 更改老师的密码
+     * @param tid
+     * @param resetWord
+     * @return
+     */
+    public Teacher resetPassword(int tid,String resetWord){
+        Teacher teacher = teacherRepository.findById(tid);
+        teacher.setPassword(resetWord);
+        return teacher;
     }
 }

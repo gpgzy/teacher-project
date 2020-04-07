@@ -31,6 +31,10 @@ public class StudentService {
         int stu = 0;
             for (Student student:list)
             {
+                if(student.getId()==null)
+                {
+                    studentRepository.save(student);
+                }
                 stu++;
                 student.setTeacher(teacher);
                 studentRepository.save(student);
