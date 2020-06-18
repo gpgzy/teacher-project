@@ -45,7 +45,7 @@ public class StudentService {
     }
 
     /**
-     *
+     *为学生添加方向
      * @param student
      * @param hobby
      * @return
@@ -59,7 +59,7 @@ public class StudentService {
     }
 
     /**
-     *
+     *删除方向
      * @param sid
      * @param hid
      * @return

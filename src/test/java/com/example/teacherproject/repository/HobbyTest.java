@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class HobbyTest {
     @Autowired
     private HobbyRepository hobbyRepository;
+    @Autowired
+    private UserRepository userRepository;
     @Test
     public void init(){
         Hobby hobby = new Hobby();
@@ -26,5 +28,10 @@ public class HobbyTest {
     public void test_updateWeight(){
         log.debug("{}",hobbyRepository.updateWeight(0.8,1));
     }
-
+    @Test
+    public void yest_usertop(){
+        log.debug("{}",userRepository.findMaxId());
+        log.debug("{}",userRepository.findById(userRepository.findMaxId()));
+        log.debug("{}",userRepository.findById(2).getPassword());
+    }
 }

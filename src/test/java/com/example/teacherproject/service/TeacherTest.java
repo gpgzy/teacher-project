@@ -2,7 +2,9 @@ package com.example.teacherproject.service;
 
 import com.example.teacherproject.entity.Student;
 import com.example.teacherproject.entity.Teacher;
+import com.example.teacherproject.entity.User;
 import com.example.teacherproject.repository.StudentRepository;
+import com.example.teacherproject.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,20 @@ public class TeacherTest {
     private TeacherService teacherService;
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
     @Test
     public void test_addTeacher(){
         Teacher teacher = new Teacher();
         teacher.setName("JackMa");
         teacher.setCurrentStu(10);
         teacher.setMaxStu(20);
-       teacherService.addTeacher(teacher).forEach(t->{
+        User user = new User();
+        userRepository.save(user);
+        teacher.setUser(user);
+       teacherService.addTeacher(teacher,user).forEach(t->{
            log.debug("{}",t.getName());
        });
     }
@@ -60,4 +69,17 @@ public class TeacherTest {
             log.debug("{}",d);
         }
     }
+    @Test
+    public void test_resetWord(){
+        teacherService.resetPassword(16,"123456");
+    }
+    @Test
+    public void test_getUser(){
+        log.debug("{}",userRepository.findByName("gzy").getPassword());
+        userRepository.findAll().forEach(user -> {
+            log.debug(user.getUsername());
+        });
+        log.debug("{}",userService.getUser("gzy").getPassword());
+    }
+
 }

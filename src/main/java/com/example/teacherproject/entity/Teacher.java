@@ -1,5 +1,6 @@
 package com.example.teacherproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +18,8 @@ public class Teacher {
     private Integer maxStu;
     private Integer currentStu;
     private Double minScore;
-    private String password;
+    @OneToOne
+    private User user;
     @OneToMany(mappedBy = "teacher")
     private List<Student> students;
     @OneToMany(mappedBy = "teacher")

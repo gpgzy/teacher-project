@@ -3,6 +3,7 @@ package com.example.teacherproject.service;
 import com.example.teacherproject.entity.Course;
 import com.example.teacherproject.entity.Student;
 import com.example.teacherproject.entity.Teacher;
+import com.example.teacherproject.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,8 @@ public class CourseTest {
         teacher.setMaxStu(20);
         course.setMinScore(60);
         course.setTeacher(teacher);
-        teacherService.addTeacher(teacher);
+        User user = new User();
+        teacherService.addTeacher(teacher,user);
         courseService.addCourse(course).forEach(course1 -> {
             log.debug("{}",course1.getName());
         });

@@ -12,4 +12,5 @@ public interface HobbyRepository extends BaseRepository<Hobby,Integer>{
     @Modifying
     @Query("update Hobby hobby set hobby.weight =:weight where hobby.id =:id")
     int updateWeight(@Param("weight") double weight,@Param("id") int id);
+    Hobby findById(@Param("id") int id);
 }

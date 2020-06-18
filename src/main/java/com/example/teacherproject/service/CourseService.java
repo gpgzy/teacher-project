@@ -65,6 +65,13 @@ public class CourseService {
         studentElectCourseRepository.updateScoreById(studentElectCourse.getId(),score);
         return studentElectCourse;
     }
+
+    /**
+     * 更改课程的权重
+     * @param cid
+     * @param weight
+     * @return
+     */
     public int updateCourseWeight(int cid,double weight){
         return courseRepository.updateWeightById(weight,cid);
     }

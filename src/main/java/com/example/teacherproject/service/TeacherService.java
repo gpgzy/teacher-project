@@ -4,38 +4,43 @@ import com.example.teacherproject.entity.*;
 import com.example.teacherproject.repository.StudentElectCourseRepository;
 import com.example.teacherproject.repository.StudentRepository;
 import com.example.teacherproject.repository.TeacherRepository;
+import com.example.teacherproject.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Slf4j
+@Transactional
 public class TeacherService {
 
 //    /**
 //    登录
 //     */
 //    Teacher login(String user,String pwd);
-//    /**
-//    * 显示所有的方向*/
-//    List<Hobby> listHobby();
-//    /**
-//    /**
-//     * 更改方向的权重*/
-//    void updateHobbyWeight(int id,double weight);
+
     @Autowired
     private TeacherRepository teacherRepository;
     @Autowired
     private StudentElectCourseRepository studentElectCourseRepository;
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private UserRepository userRepository;
     /**
      * 添加教师
      * 返回所有教师的信息
      * @param teacher
      * @return
      */
-    public List<Teacher> addTeacher(Teacher teacher){
+    public List<Teacher> addTeacher(Teacher teacher,User user){
+        userRepository.save(user);
+        teacher.setUser(user);
         teacherRepository.save(teacher);
         List<Teacher >list = teacherRepository.findAll();
         return list;
@@ -118,7 +123,13 @@ public class TeacherService {
      */
     public Teacher resetPassword(int tid,String resetWord){
         Teacher teacher = teacherRepository.findById(tid);
-        teacher.setPassword(resetWord);
+        PasswordEncoder p = new BCryptPasswordEncoder();
+        String result = p.encode(resetWord);
+        log.debug("{}",result);
+        log.debug("{}",p.matches("123456",result));
+        log.debug(resetWord);
+        teacher.getUser().setPassword(result);
         return teacher;
     }
+
 }

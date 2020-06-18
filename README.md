@@ -1,10 +1,11 @@
 
 # springboot-jpa 学生导师互选系统
+## 相关软件描述
 * 2020.3.12
 * springboot:2.2.5 
 * lombok 
 * spring-data-jpa 
-* mysql:8.x
+* mysql:8.0.13
 ---
 ## 关系描述
 * Course&Student ManyToMany

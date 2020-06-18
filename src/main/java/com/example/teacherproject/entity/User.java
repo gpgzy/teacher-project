@@ -1,29 +1,26 @@
 package com.example.teacherproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Data
 @Entity
+@Data
 @NoArgsConstructor
-public class Student {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String number;
-    private String name;
-    @OneToOne
-    private User user;
-    @ManyToOne
-    private Teacher teacher;
-    @OneToMany(mappedBy = "student")
-    private List<StudentElectHobby> studentElectHobbyList;
-    @OneToMany(mappedBy = "student")
-    private List<StudentElectCourse> studentElectCourseList;
+    public enum Role{
+        STUDENT,TEACHER
+    }
+    private String username;
+    private Role role;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
     @Column(columnDefinition = "timestamp default current_timestamp ",
             insertable = false, updatable = false)
     private LocalDateTime insertTime;
